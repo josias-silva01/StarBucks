@@ -38,6 +38,60 @@
 
 <script>
 
+document.addEventListener('DOMContentLoaded', function() {
+    const thumbnails = document.querySelectorAll('.menu .pequeno');
+    const mainImage = document.querySelector('.foto .copo-verde');
+    const circle = document.querySelector('.circulo');
+    const titleSpan = document.querySelector('header h1 span');
+    
+    
+    const colors = ['#017143', '#eb7495', '#d752b1'];
+    
+    
+    const drinkImages = [
+        './img/img1.png',
+        './img/img2.png',
+        './img/img3.png' 
+    ];
+    
+   
+    thumbnails.forEach((thumbnail, index) => {
+        thumbnail.addEventListener('click', function() {
+            
+            mainImage.src = drinkImages[index];
+            mainImage.alt = this.alt; 
+            
+            circle.style.backgroundColor = colors[index];
+            
+            mainImage.classList.add('animate');
+            setTimeout(() => {
+                mainImage.classList.remove('animate');
+            }, 500);
+            
+            thumbnails.forEach(thumb => thumb.classList.remove('active'));
+            this.classList.add('active');
+            
+            titleSpan.style.color = colors[index];
+        });
+    });
+    
+    thumbnails.forEach(thumbnail => {
+        thumbnail.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-10px)';
+            this.style.transition = 'transform 0.3s ease';
+        });
+        
+        thumbnail.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+        });
+    });
+    
+    const orderButton = document.querySelector('header button');
+    orderButton.addEventListener('click', function() {
+        alert('Pedido realizado! Obrigado por escolher o Starbucks.');
+       
+    });
+});
 
 </script>
 
